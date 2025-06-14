@@ -1,2 +1,2 @@
 # argocd
-ArgoCD configuration
+ArgoCD configuration - first directory level splits the projects.
