@@ -1,3 +1,10 @@
+cluster:
+  inClusterEnabled: false
+configs:
+  params:
+    server.insecure: true
+global:
+  domain: argocd.server.local
 server:
   ingress:
     annotations:
@@ -9,7 +16,7 @@ server:
     extraTls:
       - hosts:
         - argocd.server.local
-      secretName: argocd.server.local-tls
+        secretName: argocd.server.local-tls
     hostname: argocd.server.local
     ingressClassName: nginx
     tls: true
