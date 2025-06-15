@@ -1,8 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: apps-to-all-clusters
+  name: infrastructure
+  namespace: argo-cd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
     - matrix:
         generators:
@@ -10,20 +13,24 @@ spec:
               repoURL: https://github.com/Bravesguy18/argocd.git
               revision: HEAD
               directories:
-                - path: infrastructure/*/argocd
-          - clusters: 
-              selector:
-                matchLabels:
-                  project: gccs
+                - path: infrastructure/*
+          - clusters: {} 
+            #selector:
+              #matchLabels:
+                #project: gccs
   template:
     metadata:
-      name: '{{path.basename}}-{{name}}'
+      name: '{{.path.basename}}'
     spec:
-      project: default
+      project: infrastructure
       source:
         repoURL: https://github.com/Bravesguy18/argocd.git
         targetRevision: HEAD
-        path: '{{path}}'
+        path: '{{.path.path}}'
       destination:
-        name: '{{name}}'
-        namespace: default
+        name: '{{.name}}'
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        automated: {}
+        syncOptions:
+        - CreateNamespace=true
