@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: test-app
+  namespace: argo-cd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - clusters: {} 
+  template:
+    metadata:
+      name: test-app
+    spec:
+      project: infrastructure
+      source:
+        repoURL: https://github.com/Bravesguy18/argocd.git
+        targetRevision: HEAD
+        path: infrastructure/test-app/base
+      destination:
+        name: in-cluster
+        namespace: test
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
