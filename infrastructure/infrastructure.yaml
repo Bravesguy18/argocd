@@ -7,23 +7,23 @@ spec:
     - matrix:
         generators:
           - git:
-              repoURL: https://github.com/example-org/my-apps-repo.git
+              repoURL: https://github.com/Bravesguy18/argocd.git
               revision: HEAD
               directories:
-                - path: apps/*
-          - clusters: {}
-              #selector:
-                #matchLabels:
-                  #environment: staging
+                - path: infrastructure/*/argocd
+          - clusters: 
+              selector:
+                matchLabels:
+                  project: gccs
   template:
     metadata:
       name: '{{path.basename}}-{{name}}'
     spec:
       project: default
       source:
-        repoURL: https://github.com/example-org/my-apps-repo.git
+        repoURL: https://github.com/Bravesguy18/argocd.git
         targetRevision: HEAD
         path: '{{path}}'
       destination:
-        server: '{{server}}'
+        name: '{{name}}'
         namespace: default
