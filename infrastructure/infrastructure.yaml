@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-to-all-clusters
+spec:
+  generators:
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/example-org/my-apps-repo.git
+              revision: HEAD
+              directories:
+                - path: apps/*
+          - clusters: {}
+              #selector:
+                #matchLabels:
+                  #environment: staging
+  template:
+    metadata:
+      name: '{{path.basename}}-{{name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/example-org/my-apps-repo.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: '{{server}}'
+        namespace: default
