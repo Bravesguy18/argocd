@@ -1,0 +1,8 @@
+apiVersion: v2
+name: cert-manager
+description: A Helm chart for Kubernetes
+version: 1.5.5
+dependencies:
+  - name: cert-manager
+    version: 1.5.5
+    repository: https://charts.bitnami.com/bitnami
