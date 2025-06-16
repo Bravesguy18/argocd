@@ -21,6 +21,8 @@ spec:
   template:
     metadata:
       name: '{{.path.basename}}'
+      labels:
+        function: infrastructure
     spec:
       project: infrastructure
       source:
