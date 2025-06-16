@@ -1,6 +1,7 @@
 name: argo-cd
 description: A Helm chart for Kubernetes
 version: 8.0.17
+appVersion: v3.0.6
 dependencies:
   - name: argo-cd
     version: 8.0.17
