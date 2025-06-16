@@ -1,8 +1,8 @@
 apiVersion: v2
 name: nginx-ingress
 description: A Helm chart for Kubernetes
-version: 2.1.0
+version: 11.6.24
 dependencies:
-  - name: nginx-ingress
-    version: 2.1.0
+  - name: nginx-ingress-controller
+    version: 11.6.24
     repository: https://charts.bitnami.com/bitnami
