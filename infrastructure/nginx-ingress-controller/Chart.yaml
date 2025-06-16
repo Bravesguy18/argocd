@@ -1,5 +1,5 @@
 apiVersion: v2
-name: nginx-ingress
+name: nginx-ingress-controller
 description: A Helm chart for Kubernetes
 version: 11.6.24
 dependencies:
