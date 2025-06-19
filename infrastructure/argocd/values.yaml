@@ -1,6 +1,6 @@
 argo-cd:
   global:
-    domain: argocd.server.local
+    domain: argocd.lancebramsey.com
   cluster:
     inClusterEnabled: false
   configs:
@@ -19,7 +19,7 @@ argo-cd:
       tls: true
       extraTls:
       - hosts:
-        - argocd.server.local
-        secretName: argocd.server.local-tls
-      hostname: argocd.server.local
+        - argocd.lancebramsey.com
+        secretName: argocd.lancebramsey.com-tls
+      hostname: argocd.lancebramsey.com
       ingressClassName: nginx
