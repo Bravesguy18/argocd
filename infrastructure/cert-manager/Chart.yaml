@@ -6,4 +6,4 @@ appVersion: v1.18.0
 dependencies:
   - name: cert-manager
     version: v1.18.0
-    repositroy: "file://charts"
+    repositroy: "file://charts/cert-manager-v1.18.0.tgz"

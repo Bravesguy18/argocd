@@ -6,4 +6,4 @@ appVersion: 1.12.3
 dependencies:
   - name: nginx-ingress-controller
     version: 11.6.24
-    repositroy: "file://charts"
+    repositroy: "file://charts/nginx-ingress-controller-11.6.24.tgz"
