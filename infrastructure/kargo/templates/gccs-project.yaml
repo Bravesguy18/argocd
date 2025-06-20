@@ -1,0 +1,24 @@
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Project
+metadata:
+   name: gccs 
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: ProjectConfig
+metadata:
+  name: gccs
+spec:
+  promotionPolicies:
+  - stageSelector:
+      # Apply to a specific stage by exact name
+      name: prod-east
+    autoPromotionEnabled: false
+  - stageSelector:
+      # Apply to all stages matching a regex pattern
+      name: "regex:test-.*"
+    autoPromotionEnabled: true
+  - stageSelector:
+      # Apply to all stages matching a glob pattern
+      name: "glob:dev-*"
+    autoPromotionEnabled: true

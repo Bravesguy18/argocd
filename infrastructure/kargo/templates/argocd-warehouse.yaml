@@ -1,0 +1,10 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: argocd
+  namespace: kargo
+spec:
+  subscriptions:
+  - git:
+      repoURL: https://github.com/Bravesguy18/argocd.git
+      branch: main
