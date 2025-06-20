@@ -10,10 +10,7 @@ kargo:
         nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       enabled: true
+      ingressClassName: nginx
       tls: 
         enabled: true
-      extraTls:
-      - hosts:
-        - kargo.lancebramsey.com
-        secretName: kargo.lancebramsey.com-tls
-      ingressClassName: nginx
+        selfSignedCert: true
