@@ -2,12 +2,13 @@
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Project
 metadata:
-   name: gccs 
+   name: nginx-ingress-controller 
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: ProjectConfig
 metadata:
-  name: gccs
+  name: nginx-ingress-controller
+  namespace: nginx-ingress-controller
 spec:
   promotionPolicies:
   - stageSelector:
