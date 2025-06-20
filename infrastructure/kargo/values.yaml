@@ -1,6 +1,6 @@
 kargo:
-  host: kargo.lancebramsey.com
   api:
+    host: kargo.lancebramsey.com
     secret:
       name: kargo-admin
     ingress:
