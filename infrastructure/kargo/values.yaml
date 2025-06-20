@@ -1,3 +1,10 @@
-api:
-  adminAccount:
-    passwordHash: "$2y$10$x4686wNTu5nl6vDtaPwle.XiQ0MwnE8c4lwiSAp57llNjJC.P.fue"
+kargo:
+  api:
+    adminAccount:
+      passwordHash: "$$2y$$10$$lvzWQCDdkYBpiM3NRGWakO7.Hq22kt3BWw5p9T3wWLIjWaEVaqSc."
+      tokenSigningKey: "xActEakwbnc4YQHfj7Zl9opT4pKEbybO"
+
+      #Password: vHupN66CDwcG21ODc0O2wOIAGhp7mUwe
+      #Password Hash: $2y$10$lvzWQCDdkYBpiM3NRGWakO7.Hq22kt3BWw5p9T3wWLIjWaEVaqSc.
+      #Signing Key: xActEakwbnc4YQHfj7Zl9opT4pKEbybO
+
