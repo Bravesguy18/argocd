@@ -130,8 +130,6 @@ argocd-apps:
           name: '{{path.basename}}'
           labels:
             function: bootstrap
-          annotations:
-            argocd.argoproj.io/enable-finalizer: "false"
         spec:
           project: bootstrap
           source:
