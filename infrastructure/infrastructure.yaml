@@ -23,9 +23,8 @@ spec:
       name: '{{.path.basename}}'
       labels:
         function: infrastructure
-      metadata:
-        finalizers:
-          - resources-finalizer.argocd.argoproj.io
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io
     spec:
       project: infrastructure
       source:
@@ -41,6 +40,3 @@ spec:
           selfHeal: true
         syncOptions:
           - CreateNamespace=true
-      preserveResourcesOnDeletion:
-        - apiVersion: v1
-          kind: PersistentVolumeClaim
