@@ -14,7 +14,7 @@ argo-cd:
     ingress:
       annotations:
         cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
-        #nginx.ingress.kubernetes.io/app-root: /login
+        nginx.ingress.kubernetes.io/app-root: /login
         nginx.ingress.kubernetes.io/backend-protocol: HTTPS
         nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       enabled: true
@@ -78,8 +78,8 @@ argocd-apps:
             - p, proj:monitoring:read-only, applications, get, monitoring/*, allow
           groups:
             - infrastructure
-      orphanedResources:
-        warn: true
+      #orphanedResources:
+        #warn: true
           
   applicationsets:
     infrastructure:
