@@ -10,6 +10,11 @@ argo-cd:
       argocdServerAdminPassword: "$2y$10$KdfSAG57mO2CQk/JRJCbVeB7.11TYnS/AANxYF9OZjqd6VATKKzhG"
   crds:
     keep: true
+  params:
+    applicationsetcontroller.policy: create-only
+    applicationsetcontroller.enable.progressive.syncs: true
+    applicationsetcontroller.namespaces: "argocd,argocd-appsets"
+    application.namespaces: "data-ops"
   server:
     ingress:
       annotations:
