@@ -1,3 +1,5 @@
 cert-manager:
-  installCRDs: true
+  crds:
+    keep: true
+    enabled: true
   enableCertificateOwnerRef: true
