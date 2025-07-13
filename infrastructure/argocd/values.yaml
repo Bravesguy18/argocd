@@ -53,7 +53,7 @@ argocd-apps:
           groups:
             - infrastructure
       orphanedResources:
-        warn: true
+        warn: false
     monitoring:
       name: monitoring
       namespace: argocd
@@ -78,8 +78,8 @@ argocd-apps:
             - p, proj:monitoring:read-only, applications, get, monitoring/*, allow
           groups:
             - infrastructure
-      #orphanedResources:
-        #warn: true
+      orphanedResources:
+        warn: false
           
   applicationsets:
     infrastructure:
@@ -104,21 +104,20 @@ argocd-apps:
         - /spec/syncPolicy
       # Progressive Syncs is an experimental feature and it must be explicitly enabled
       # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/#enabling-progressive-syncs
-      #strategy:
-      #  type: RollingSync
-      #  rollingSync:
-      #    steps:
-      #    - matchExpressions:
-      #      - key: project
-      #        operator: In
-      #        values:
-      #        - guestbook
-      #    - matchExpressions:
-      #      - key: project
-      #        operator: In
-      #        values:
-      #        - kustomize-foo
-      #        - kustomize-bar
+      strategy:
+        type: RollingSync
+        rollingSync:
+          steps:
+          - matchExpressions:
+            - key: namespace
+              operator: In
+              values:
+              - argocd
+          - matchExpressions:
+            - key: project
+              operator: In
+              values:
+              - infrastructure
       template:
         metadata:
           name: '{{path.basename}}'
