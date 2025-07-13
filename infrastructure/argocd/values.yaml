@@ -81,63 +81,61 @@ argocd-apps:
       orphanedResources:
         warn: true
           
-applicationsets:
-  infrastructure:
-    namespace: argocd
-    additionalLabels: {}
-    additionalAnnotations: {}
-    finalizers:
-    - resources-finalizer.argocd.argoproj.io
-    goTemplate: true
-    goTemplateOptions: ["missingkey=error"]
-    generators:
-    - matrix:
-        generators:
-        - git:
-            repoURL: https://github.com/argoproj/argocd-example-apps.git
-            revision: HEAD
-            directories:
-              - path: infrastructure/*
-        - clusters: {}
-    ignoreApplicationDifferences:
-    - jsonPointers:
-      - /spec/syncPolicy
-    # Progressive Syncs is an experimental feature and it must be explicitly enabled
-    # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/#enabling-progressive-syncs
-    strategy:
-      type: RollingSync
-      rollingSync:
-        steps:
-        - matchExpressions:
-          - key: project
-            operator: In
-            values:
-            - guestbook
-        - matchExpressions:
-          - key: project
-            operator: In
-            values:
-            - kustomize-foo
-            - kustomize-bar
-    template:
-      metadata:
-        name: '{{.path.basename}}'
-        labels:
-          function: infrastructure
-        finalizers:
-          - resources-finalizer.argocd.argoproj.io
-      spec:
-        project: infrastructure
-        source:
-          repoURL: https://github.com/Bravesguy18/argocd.git
-          targetRevision: HEAD
-          path: '{{.path.path}}'
-        destination:
-          name: '{{.name}}'
-          namespace: '{{.path.basename}}'
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
-          syncOptions:
-            - CreateNamespace=true
+  applicationsets:
+    infrastructure:
+      namespace: argocd
+      additionalLabels: {}
+      additionalAnnotations: {}
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+      #goTemplate: true
+      #goTemplateOptions: ["missingkey=error"]
+      generators:
+      - matrix:
+          generators:
+          - git:
+              repoURL: https://github.com/Bravesguy18/argocd.git
+              revision: HEAD
+              directories:
+                - path: infrastructure/*
+          - clusters: {}
+      ignoreApplicationDifferences:
+      - jsonPointers:
+        - /spec/syncPolicy
+      # Progressive Syncs is an experimental feature and it must be explicitly enabled
+      # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/#enabling-progressive-syncs
+      #strategy:
+      #  type: RollingSync
+      #  rollingSync:
+      #    steps:
+      #    - matchExpressions:
+      #      - key: project
+      #        operator: In
+      #        values:
+      #        - guestbook
+      #    - matchExpressions:
+      #      - key: project
+      #        operator: In
+      #        values:
+      #        - kustomize-foo
+      #        - kustomize-bar
+      template:
+        metadata:
+          name: '{{path.basename}}'
+          labels:
+            function: infrastructure
+        spec:
+          project: infrastructure
+          source:
+            repoURL: https://github.com/Bravesguy18/argocd.git
+            targetRevision: HEAD
+            path: '{{path.path}}'
+          destination:
+            name: '{{name}}'
+            namespace: '{{path.basename}}'
+          syncPolicy:
+            automated:
+              prune: false
+              selfHeal: true
+            syncOptions:
+              - CreateNamespace=true
