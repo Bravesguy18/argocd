@@ -9,7 +9,7 @@ argo-cd:
     secret:
       argocdServerAdminPassword: "$2y$10$KdfSAG57mO2CQk/JRJCbVeB7.11TYnS/AANxYF9OZjqd6VATKKzhG"
   crds:
-    keep: false
+    keep: true
   server:
     ingress:
       annotations:
@@ -26,13 +26,14 @@ argo-cd:
       hostname: argocd.lancebramsey.com
       ingressClassName: nginx
 
+argocd-apps:
   projects:
     infrastructure:
       name: infrastructure
       namespace: argocd
       annotations: {}
       labels: {}
-      description: Infrastructure project
+      description: 'Infrastructure project created in Helm chart'
       sourceRepos:
         - '*'
       destinations:
@@ -53,3 +54,90 @@ argo-cd:
             - infrastructure
       orphanedResources:
         warn: true
+    monitoring:
+      name: monitoring
+      namespace: argocd
+      annotations: {}
+      labels: {}
+      description: 'Monitoring project created in Helm chart'
+      sourceRepos:
+        - '*'
+      destinations:
+        - namespace: '*'
+          server: '*'
+      clusterResourceWhitelist:
+        - group: '*'
+          kind: '*'
+      namespaceResourceWhitelist:
+        - group: '*'
+          kind: '*'
+      roles:
+        - name: read-only
+          description: Read-only access
+          policies:
+            - p, proj:monitoring:read-only, applications, get, monitoring/*, allow
+          groups:
+            - infrastructure
+      orphanedResources:
+        warn: true
+          
+applicationsets:
+  infrastructure:
+    namespace: argocd
+    additionalLabels: {}
+    additionalAnnotations: {}
+    finalizers:
+    - resources-finalizer.argocd.argoproj.io
+    goTemplate: true
+    goTemplateOptions: ["missingkey=error"]
+    generators:
+    - matrix:
+        generators:
+        - git:
+            repoURL: https://github.com/argoproj/argocd-example-apps.git
+            revision: HEAD
+            directories:
+              - path: infrastructure/*
+        - clusters: {}
+    ignoreApplicationDifferences:
+    - jsonPointers:
+      - /spec/syncPolicy
+    # Progressive Syncs is an experimental feature and it must be explicitly enabled
+    # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/#enabling-progressive-syncs
+    strategy:
+      type: RollingSync
+      rollingSync:
+        steps:
+        - matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - guestbook
+        - matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - kustomize-foo
+            - kustomize-bar
+    template:
+      metadata:
+        name: '{{.path.basename}}'
+        labels:
+          function: infrastructure
+        finalizers:
+          - resources-finalizer.argocd.argoproj.io
+      spec:
+        project: infrastructure
+        source:
+          repoURL: https://github.com/Bravesguy18/argocd.git
+          targetRevision: HEAD
+          path: '{{.path.path}}'
+        destination:
+          name: '{{.name}}'
+          namespace: '{{.path.basename}}'
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+          syncOptions:
+            - CreateNamespace=true
