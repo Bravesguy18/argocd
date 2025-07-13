@@ -19,11 +19,11 @@ argo-cd:
         nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       enabled: true
       tls: true
-      extraTls:
-      - hosts:
-        - argocd.lancebramsey.com
-        secretName: argocd.lancebramsey.com-tls
-      hostname: argocd.lancebramsey.com
+      #extraTls:
+      #- hosts:
+      #  - argocd.lancebramsey.com
+      #  secretName: argocd.lancebramsey.com-tls
+      #hostname: argocd.lancebramsey.com
       ingressClassName: nginx
 
 argocd-apps:
