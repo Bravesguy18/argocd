@@ -112,44 +112,6 @@ argocd-apps:
         warn: false
           
   applicationsets:
-    bootstrap:
-      namespace: argocd
-      additionalLabels: {}
-      additionalAnnotations: {}
-      finalizers:
-      - resources-finalizer.argocd.argoproj.io
-      generators:
-      - matrix:
-          generators:
-          - git:
-              repoURL: https://github.com/Bravesguy18/argocd.git
-              revision: HEAD
-              directories:
-                - path: bootstrap/*
-          - clusters: {}
-      ignoreApplicationDifferences:
-      - jsonPointers:
-        - /spec/syncPolicy
-      template:
-        metadata:
-          name: '{{path.basename}}'
-          labels:
-            function: bootstrap
-        spec:
-          project: bootstrap
-          source:
-            repoURL: https://github.com/Bravesguy18/argocd.git
-            targetRevision: HEAD
-            path: '{{path}}'
-          destination:
-            name: '{{name}}'
-            namespace: argocd
-          syncPolicy:
-            automated:
-              prune: true
-              selfHeal: true
-            syncOptions:
-              - CreateNamespace=true
     infrastructure:
       namespace: argocd
       additionalLabels: {}
