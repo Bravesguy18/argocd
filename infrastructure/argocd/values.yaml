@@ -129,7 +129,7 @@ argocd-apps:
           source:
             repoURL: https://github.com/Bravesguy18/argocd.git
             targetRevision: HEAD
-            path: '{{path.path}}'
+            path: '{{path}}'
           destination:
             name: '{{name}}'
             namespace: '{{path.basename}}'
