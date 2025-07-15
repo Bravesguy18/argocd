@@ -22,7 +22,7 @@ spec:
       source:
         repoURL: https://github.com/argoproj/argocd-example-apps.git
         targetRevision: HEAD
-        path: guestbook/{{.cluster}}
+        path: guestbook
       destination:
         server: '{{.url}}'
         namespace: guestbook
