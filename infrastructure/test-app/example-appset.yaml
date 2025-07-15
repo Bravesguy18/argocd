@@ -10,7 +10,7 @@ spec:
   - clusters: {}
   template:
     metadata:
-      name: '{{.cluster}}-guestbook'
+      name: '{{.name}}-guestbook'
     spec:
       project: infrastructure
       source:
@@ -18,5 +18,5 @@ spec:
         targetRevision: HEAD
         path: guestbook
       destination:
-        server: '{{.url}}'
+        name: '{{.name}}'
         namespace: guestbook
