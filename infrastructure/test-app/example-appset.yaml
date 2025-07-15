@@ -18,9 +18,9 @@ spec:
     metadata:
       name: '{{.cluster}}-guestbook'
     spec:
-      project: my-project
+      project: infrastructure
       source:
-        repoURL: https://github.com/infra-team/cluster-deployments.git
+        repoURL: https://github.com/argoproj/argocd-example-apps.git
         targetRevision: HEAD
         path: guestbook/{{.cluster}}
       destination:
