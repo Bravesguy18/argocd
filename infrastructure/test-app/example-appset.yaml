@@ -7,14 +7,7 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - list:
-      elements:
-      - cluster: engineering-dev
-        url: https://1.2.3.4
-      - cluster: engineering-prod
-        url: https://2.4.6.8
-      - cluster: finance-preprod
-        url: https://9.8.7.6
+  - clusters: {}
   template:
     metadata:
       name: '{{.cluster}}-guestbook'
