@@ -1,6 +1,6 @@
 argo-cd:
   global:
-    domain: argocd.lancebramsey.com
+    domain: argo-cd.lancebramsey.com
   cluster:
     inClusterEnabled: true
   configs:
@@ -13,7 +13,7 @@ argo-cd:
   params:
     applicationsetcontroller.policy: create-only
     applicationsetcontroller.enable.progressive.syncs: true
-    applicationsetcontroller.namespaces: "argocd,argocd-appsets"
+    applicationsetcontroller.namespaces: "argo-cd,argocd-appsets"
     application.namespaces: "data-ops"
   server:
     ingress:

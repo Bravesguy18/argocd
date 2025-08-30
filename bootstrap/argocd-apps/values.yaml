@@ -2,7 +2,7 @@ argocd-apps:
   projects:
     bootstrap:
       name: bootstrap
-      namespace: argocd
+      namespace: argo-cd
       annotations: {}
       labels: {}
       description: 'Infrastructure project created in Helm chart'
@@ -28,7 +28,7 @@ argocd-apps:
         warn: false
     infrastructure:
       name: infrastructure
-      namespace: argocd
+      namespace: argo-cd
       annotations: {}
       labels: {}
       description: 'Infrastructure project created in Helm chart'
@@ -54,7 +54,7 @@ argocd-apps:
         warn: false
     monitoring:
       name: monitoring
-      namespace: argocd
+      namespace: argo-cd
       annotations: {}
       labels: {}
       description: 'Monitoring project created in Helm chart'
@@ -81,7 +81,7 @@ argocd-apps:
           
   applicationsets:
     infrastructure:
-      namespace: argocd
+      namespace: argo-cd
       additionalLabels: {}
       additionalAnnotations: {}
       finalizers:
@@ -135,7 +135,7 @@ argocd-apps:
             syncOptions:
               - CreateNamespace=true
     bootstrap:
-      namespace: argocd
+      namespace: argo-cd
       additionalLabels: {}
       additionalAnnotations: {}
       finalizers:
