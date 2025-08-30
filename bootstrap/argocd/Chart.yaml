@@ -1,0 +1,10 @@
+apiVersion: v2
+name: argo-cd
+description: A Helm chart for Kubernetes
+type: application
+version: 8.0.17
+appVersion: v8.0.17
+dependencies:
+  - name: argo-cd
+    version: 8.0.17
+    repository: "file://./charts/argo-cd-8.0.17.tgz"
