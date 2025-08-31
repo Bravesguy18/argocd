@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - ../base/
 
-helmCharts:
-  valuesInline:
+#helmCharts:
+  #valuesInline:
     #minecraftServer:
     #eula: "true"
