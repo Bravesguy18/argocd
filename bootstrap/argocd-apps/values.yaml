@@ -98,22 +98,6 @@ argocd-apps:
       ignoreApplicationDifferences:
       - jsonPointers:
         - /spec/syncPolicy
-      # Progressive Syncs is an experimental feature and it must be explicitly enabled
-      # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/#enabling-progressive-syncs
-      #strategy:
-      #  type: RollingSync
-      #  rollingSync:
-      #    steps:
-      #    - matchExpressions:
-      #      - key: namespace
-      #        operator: In
-      #        values:
-      #        - argocd
-      #    - matchExpressions:
-      #      - key: project
-      #        operator: In
-      #        values:
-      #        - infrastructure
       template:
         metadata:
           name: '{{path.basename}}'
@@ -152,22 +136,6 @@ argocd-apps:
       ignoreApplicationDifferences:
       - jsonPointers:
         - /spec/syncPolicy
-      # Progressive Syncs is an experimental feature and it must be explicitly enabled
-      # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/Progressive-Syncs/#enabling-progressive-syncs
-      #strategy:
-      #  type: RollingSync
-      #  rollingSync:
-      #    steps:
-      #    - matchExpressions:
-      #      - key: namespace
-      #        operator: In
-      #        values:
-      #        - argocd
-      #    - matchExpressions:
-      #      - key: project
-      #        operator: In
-      #        values:
-      #        - infrastructure
       template:
         metadata:
           name: '{{path.basename}}'
@@ -179,6 +147,44 @@ argocd-apps:
             repoURL: https://github.com/Bravesguy18/argocd.git
             targetRevision: HEAD
             path: '{{path}}'
+          destination:
+            name: '{{name}}'
+            namespace: '{{path.basename}}'
+          syncPolicy:
+            automated:
+              prune: true
+              selfHeal: true
+            syncOptions:
+              - CreateNamespace=true
+    monitoring:
+      namespace: argo-cd
+      additionalLabels: {}
+      additionalAnnotations: {}
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+      generators:
+      - matrix:
+          generators:
+          - git:
+              repoURL: https://github.com/Bravesguy18/argocd.git
+              revision: HEAD
+              directories:
+                - path: monitoring/*
+          - clusters: {}
+      ignoreApplicationDifferences:
+      - jsonPointers:
+        - /spec/syncPolicy
+      template:
+        metadata:
+          name: '{{path.basename}}'
+          labels:
+            function: monitoring
+        spec:
+          project: monitoring
+          source:
+            repoURL: https://github.com/Bravesguy18/argocd.git
+            targetRevision: HEAD
+            path: '{{path}}/overlay/{{name}}'
           destination:
             name: '{{name}}'
             namespace: '{{path.basename}}'

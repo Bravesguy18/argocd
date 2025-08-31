@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+#- base/gateway.yaml
+
+helmCharts:
+- name: kube-prometheus-stack
+  releaseName: prometheus
+  repo: "file://../charts/kube-prometheus-stack-75.10.0.tgz"
+  version: 75.10.0
+  valuesInline:
+    #minecraftServer:
+    #eula: "true"
