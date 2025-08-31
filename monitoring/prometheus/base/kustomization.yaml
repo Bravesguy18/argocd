@@ -11,6 +11,7 @@ helmCharts:
     version: 75.10.0
     #releaseNamespace: prometheus
     namespace: prometheus
+    installCRDs: true
     valuesFile: values.yaml
     #valuesInline:
       #minecraftServer:
