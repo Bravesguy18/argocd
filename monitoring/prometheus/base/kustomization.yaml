@@ -10,8 +10,8 @@ helmCharts:
     #repo: "file://../charts/kube-prometheus-stack-75.10.0.tgz"
     version: 75.10.0
     #releaseNamespace: prometheus
-    #namespace: argocd
-    #valuesFile: values.yaml
+    namespace: prometheus
+    valuesFile: values.yaml
     #valuesInline:
       #minecraftServer:
       #eula: "true"
