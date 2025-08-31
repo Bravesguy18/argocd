@@ -184,7 +184,7 @@ argocd-apps:
           source:
             repoURL: https://github.com/Bravesguy18/argocd.git
             targetRevision: HEAD
-            path: '{{path}}/overlay/{{name}}'
+            path: '{{path}}/overlays/{{name}}'
           destination:
             name: '{{name}}'
             namespace: '{{path.basename}}'
