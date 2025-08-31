@@ -6,7 +6,7 @@ kind: Kustomization
 
 helmCharts:
   - name: kube-prometheus-stack
-    releaseName: kube-prometheus-stack
+    #releaseName: kube-prometheus-stack
     #repo: "file://../charts/kube-prometheus-stack-75.10.0.tgz"
     version: 75.10.0
     #releaseNamespace: prometheus
