@@ -5,7 +5,10 @@ prometheusOperator:
 prometheus:
   ingress: 
     enabled: true
+    cert-manager.io/cluster-issuer: nameOfClusterIssuer
     ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: selfsigned-cluster-issuer 
     hosts:
       - prometheus.lancebramsey.com
     tla:
