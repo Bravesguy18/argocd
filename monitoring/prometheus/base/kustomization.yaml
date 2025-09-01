@@ -9,6 +9,5 @@ helmCharts:
     includeCRDs: true
     valuesFile: values.yaml
     #valuesInline:
-      #minecraftServer:
       #eula: "true"
 
