@@ -1,3 +1,4 @@
 prometheusOperator:
   admissionWebhooks:
-    certManager: enabled
+    certManager: 
+      enabled: true
