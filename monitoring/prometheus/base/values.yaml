@@ -2,3 +2,15 @@ prometheusOperator:
   admissionWebhooks:
     certManager: 
       enabled: true
+prometheus:
+  ingress: 
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - prometheus.lancebramsey.com
+    tla:
+      - secretName: prometheus-general-tls
+        hosts:
+          - prometheus.lancebramsey.com
+grafana:
+  enabled: false
