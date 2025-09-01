@@ -152,8 +152,6 @@ argocd-apps:
             namespace: '{{path.basename}}'
           syncPolicy:
             automated:
-              prune: true
-              selfHeal: true
             syncOptions:
               - CreateNamespace=true
     monitoring:
@@ -190,8 +188,6 @@ argocd-apps:
             namespace: '{{path.basename}}'
           syncPolicy:
             automated:
-              prune: true
-              selfHeal: true
             syncOptions:
               - CreateNamespace=true
               - ServerSideApply=true
