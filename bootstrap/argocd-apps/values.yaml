@@ -26,6 +26,7 @@ argocd-apps:
             - bootstrap
       orphanedResources:
         warn: false
+
     infrastructure:
       name: infrastructure
       namespace: argo-cd
@@ -52,6 +53,7 @@ argocd-apps:
             - infrastructure
       orphanedResources:
         warn: false
+
     monitoring:
       name: monitoring
       namespace: argo-cd
@@ -80,44 +82,6 @@ argocd-apps:
         warn: false
           
   applicationsets:
-    infrastructure:
-      namespace: argo-cd
-      additionalLabels: {}
-      additionalAnnotations: {}
-      finalizers:
-      - resources-finalizer.argocd.argoproj.io
-      generators:
-      - matrix:
-          generators:
-          - git:
-              repoURL: https://github.com/Bravesguy18/argocd.git
-              revision: HEAD
-              directories:
-                - path: infrastructure/*
-          - clusters: {}
-      ignoreApplicationDifferences:
-      - jsonPointers:
-        - /spec/syncPolicy
-      template:
-        metadata:
-          name: '{{path.basename}}'
-          labels:
-            function: infrastructure
-        spec:
-          project: infrastructure
-          source:
-            repoURL: https://github.com/Bravesguy18/argocd.git
-            targetRevision: HEAD
-            path: '{{path}}'
-          destination:
-            name: '{{name}}'
-            namespace: '{{path.basename}}'
-          syncPolicy:
-            automated:
-              prune: true
-              selfHeal: true
-            syncOptions:
-              - CreateNamespace=true
     bootstrap:
       namespace: argo-cd
       additionalLabels: {}
@@ -154,6 +118,45 @@ argocd-apps:
             automated:
               prune: false
               selfHeal: false
+            syncOptions:
+              - CreateNamespace=true
+
+    infrastructure:
+      namespace: argo-cd
+      additionalLabels: {}
+      additionalAnnotations: {}
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+      generators:
+      - matrix:
+          generators:
+          - git:
+              repoURL: https://github.com/Bravesguy18/argocd.git
+              revision: HEAD
+              directories:
+                - path: infrastructure/*
+          - clusters: {}
+      ignoreApplicationDifferences:
+      - jsonPointers:
+        - /spec/syncPolicy
+      template:
+        metadata:
+          name: '{{path.basename}}'
+          labels:
+            function: infrastructure
+        spec:
+          project: infrastructure
+          source:
+            repoURL: https://github.com/Bravesguy18/argocd.git
+            targetRevision: HEAD
+            path: '{{path}}'
+          destination:
+            name: '{{name}}'
+            namespace: '{{path.basename}}'
+          syncPolicy:
+            automated:
+              prune: true
+              selfHeal: true
             syncOptions:
               - CreateNamespace=true
       syncPolicy:
