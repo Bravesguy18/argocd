@@ -156,6 +156,9 @@ argocd-apps:
               selfHeal: false
             syncOptions:
               - CreateNamespace=true
+      syncPolicy:
+        applicationsSync: create-only
+
     monitoring:
       namespace: argo-cd
       additionalLabels: {}
@@ -195,3 +198,5 @@ argocd-apps:
             syncOptions:
               - CreateNamespace=true
               - ServerSideApply=true
+      syncPolicy:
+        applicationsSync: create-only
