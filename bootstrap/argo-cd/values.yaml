@@ -13,8 +13,8 @@ argo-cd:
   params:
     applicationsetcontroller.policy: create-only
     applicationsetcontroller.enable.progressive.syncs: true
-    applicationsetcontroller.namespaces: "argo-cd,argocd-appsets"
-    application.namespaces: "data-ops"
+    applicationsetcontroller.namespaces: "argo-cd,argocd-apps"
+    application.namespaces: "argo-cd,argocd-apps"
   server:
     ingress:
       annotations:

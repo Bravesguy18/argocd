@@ -2,9 +2,9 @@ apiVersion: v2
 name: argocd-apps
 description: A Helm chart for Kubernetes
 type: application
-version: 2.0.2
-appVersion: v2.0.2
+version: 2.0.4
+appVersion: v2.0.4
 dependencies:
   - name: argocd-apps
-    version: 2.0.2
-    repository: "file://./charts/argocd-apps-2.0.2.tgz"
+    version: 2.0.4
+    repository: "file://./charts/argocd-apps-2.0.4.tgz"
