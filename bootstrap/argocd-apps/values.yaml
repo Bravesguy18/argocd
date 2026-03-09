@@ -159,8 +159,6 @@ argocd-apps:
               selfHeal: true
             syncOptions:
               - CreateNamespace=true
-      syncPolicy:
-        applicationsSync: create-only
 
     monitoring:
       namespace: argo-cd
@@ -200,6 +198,3 @@ argocd-apps:
               selfHeal: false
             syncOptions:
               - CreateNamespace=true
-              - ServerSideApply=true
-      syncPolicy:
-        applicationsSync: create-only
